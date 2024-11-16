@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="createEmp.css">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Employeement list</a></li>
+           
+            <li><a href="#">Name</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="DashTitle">
+     <h2>Create Employee</h2>
+    </div>
+
+    <!-- Dashboard Content -->
+    
+    <div class="form-container">
+        <form class="registration-form">
+           
+
+            <!-- Name Field -->
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Mobile Number Field -->
+            <div class="input-group">
+                <label for="mobile">Mobile No</label>
+                <input type="tel" id="mobile" placeholder="Enter your mobile number" required>
+            </div>
+
+            <!-- Designation Dropdown -->
+            <div class="input-group">
+                <label for="designation">Designation</label>
+                <select id="designation" required>
+                    <option value="">Select Designation</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Designer">Designer</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Intern">Intern</option>
+                </select>
+            </div>
+
+            <!-- Gender Radio Buttons -->
+            <div class="input-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label><input type="radio" name="gender" value="Female" required> Female</label>
+                    <label><input type="radio" name="gender" value="Other" required> Other</label>
+                </div>
+            </div>
+
+            <!-- Course Checkboxes -->
+            <div class="input-group">
+                <label>Course</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="course" value="MCA"> MCA</label>
+                    <label><input type="checkbox" name="course" value="BCA"> BCA</label>
+                    <label><input type="checkbox" name="course" value="BSC"> BSC</label>
+                </div>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="input-group">
+                <label for="img">Upload Image</label>
+                <input type="file" id="img" accept="image/*" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        <!-- JavaScript for Validation -->
+    
+        const form = document.getElementById('registrationForm');
+        const emailField = document.getElementById('email');
+        const mobileField = document.getElementById('mobile');
+        const imageField = document.getElementById('img');
+
+        // Simulate a list of existing emails for duplicate check
+        const existingEmails = ["test@example.com", "user@example.com"];
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Validate Email Format
+            const email = emailField.value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Check for Duplicate Email
+            if (existingEmails.includes(email)) {
+                alert('This email is already registered.');
+                return;
+            }
+
+            // Validate Mobile Number (only digits)
+            const mobile = mobileField.value;
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile)) {
+                alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+
+            // Validate Image Upload (only jpg/png)
+            const file = imageField.files[0];
+            if (file) {
+                const allowedTypes = ['image/jpeg', 'image/png'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Only JPG and PNG files are allowed.');
+                    return;
+                }
+            } else {
+                alert('Please upload an image file.');
+                return;
+            }
+
+            // If all validations pass
+            alert('Form submitted successfully!');
+            form.reset();
+        });
+    
+    </script>
+</body>
+</html>
